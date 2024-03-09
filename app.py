@@ -71,5 +71,5 @@ def get_summary():
         context["message"] = "Enter a video url. Empty field not allowed!"
     return render_template("summary.html", context=context)
 
-# if __name__ == "__main__":
-#     app.run(debug=True, port=5050) # host="0.0.0.0",
+if __name__ == "__main__":
+    app.run(debug=True, port=8000) # host="0.0.0.0",
