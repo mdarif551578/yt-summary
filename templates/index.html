@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block head %}
+    {% include './header.html' %}
+{% endblock %}
+
+{% block content %}
+<div class="bg-gray-100" x-data="{
+    is_visible_video_summary_field: true,
+    is_submited: false,
+    app_name: 'y2summary - Youtube Video Summarizer',
+}">
+
+    <div class="py-8 px-4 mx-auto container md:w-2/3 xl:w-1/2">
+
+        <!-- top card -->
+        <div class="ui center aligned secondary segment overflow-hidden">
+
+            <div class="ui top left secondary attached label">
+                <a class="ui left secondary corner label" href="#">
+                    <div class="-mr-2 cursor-pointer">
+                        <!-- <i class="star icon teal"></i> -->
+                        <i class="github square icon"></i>
+                    </div>
+                </a>
+            </div>
+
+            <div class="ui top right attached label">
+                <a class="ui right corner label" href="#">
+                    <i class="edit icon"></i>
+                    <!-- <div class="mt-2 -mr-5">
+                        <div class="ui red empty circular label"></div>
+                    </div> -->
+                </a>
+            </div>
+
+            <div class="">
+                <div x-text="app_name" class="text-gray-600 text-2xl font-semibold pt-6 pb-4"></div>
+            </div>
+
+            <!-- divider -->
+            <div class="ui horizontal divider">
+                <a @click="is_visible_video_summary_field = !is_visible_video_summary_field" class="ui tag label">
+                    Short and Sweet<br>Summary
+                </a>
+            </div>
+
+            <!-- from container -->
+            <div class="mt-8 mb-6">
+                <form class="ui action left icon input"
+                    hx-post="/summary"
+                    hx-target="#summaryContainer"
+                    hx-swap="innerHTML"
+                    >
+                    <i class="paste icon cursor-pointer"></i>
+                    <input type="text" name="video_url" placeholder="Paste Video URL here...">
+                    <button class="ui teal button" type="submit" @click="is_submited=true">
+                        <span x-show="!is_submited">Generate</span>
+                        <div x-show="is_submited" class="-mr-1">
+                            <i class="spinner loading icon"></i>
+                        </div>
+                    </button>
+                </form>
+            </div>
+
+        </div>
+
+        <div class="h-4"></div>
+
+        <!-- summary container -->
+        <div id="summaryContainer" x-show="!is_submited">
+            <!-- <div x-show="is_visible_video_summary_field" x-transition x-cloak class="ui center aligned secondary segment">
+                <div class="py-4">
+                    <span class="text-gray-600 ui header" x-text="video_details['title']"></span>
+                    <h5 class="ui dividing header">
+                        <div class="text-gray-600 -mt-6 mb-2">
+                            <span> -- </span>
+                            <span x-text="video_details['author']"></span>
+                        </div>
+                    </h5>
+                </div>
+                <div class="pb-4" x-text="video_details['summary']"></div>
+            </div> -->
+        </div>
+
+    </div>
+
+</div>
+{% endblock %}

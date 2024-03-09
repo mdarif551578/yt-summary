@@ -1,0 +1,21 @@
+<div class="hidden" x-init="is_submited=false"></div>
+{% if context.is_succeed %}
+    <div x-show="is_visible_video_summary_field" x-transition x-cloak class="ui center aligned secondary segment">
+        <div class="py-4">
+            <span class="text-gray-600 ui header">{{ context.title }}</span>
+            <h5 class="ui dividing header">
+                <div class="text-gray-600 -mt-6 mb-2">
+                    <span> -- </span>
+                    <span>{{ context.channel }}</span>
+                </div>
+            </h5>
+        </div>
+        <div class="pb-4 text-left">{{ context.summary | safe }}</div>
+    </div>
+{% else %}
+    <div x-show="is_visible_video_summary_field" x-transition x-cloak class="ui center aligned secondary segment">
+        <div class="py-4">
+            <span class="text-gray-600">{{ context.message }}</span>
+        </div>
+    </div>
+{% endif %}
